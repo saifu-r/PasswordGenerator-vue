@@ -1,39 +1,37 @@
 <template>
-  <div class="container" >
-  <div class="password-generator-container" >
-    <h1 class="mb-4">Password Generator</h1>
+  <div class="app bg-secondary" >
+    <div class="container1 " >
+      <h3 class="title">Password Generator</h3>
 
-    <div class="passfield mb-4">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center border p-3" style="height: 60px;">
-          <h3 ref="textToCopy" class="m-0">{{ NGpass || ' ' }}</h3>
-          <button @click="copyText" class="btn btn-primary">Copy</button>
+      <div class="view-container">
+        <div class="password-container">
+          <h3 ref="textToCopy" class="password">{{ NGpass || ' ' }}</h3>
+          <button @click="copyText" class="btn-copy"><img src="./assets/copy.png" alt="copy.image"></button>
         </div>
+
+        <div class="length-container">
+          <h5 class="length">Password length</h5>
+          <input type="number" v-model="passLength" class="length-value" min="3" max="15"/>
+        </div>
+
+        <div class="checkbox-container">
+          <label v-for="type in types" :key="type" class="checkbox-label">    
+            <div>
+              <h6 class="option" v-if="type === 'lower'">{{ "Include lowercase letters" }}</h6>
+              <h6 class="option" v-else-if="type === 'upper'">{{ "Include uppercase letters" }}</h6>
+              <h6 class="option" v-else-if="type === 'number'">{{ "Include numbers" }}</h6>
+              <h6 class="option" v-else-if="type === 'symbol'">{{ "Include symbols" }}</h6>
+            </div>
+
+            <div class="checkbox-values">
+              <input type="checkbox" class="checkbox-value" name="condition" :value="type" v-model="conditions"/>
+            </div>
+          </label>
+        </div> 
       </div>
-
-      <div class="length d-flex justify-content-between align-items-center">
-        <h5 class="m-0">Password length</h5>
-        <input type="number" v-model="passLength" class="form-control" style="width: 100px;" min="3" max="15"/>
-      </div>
-
-      <div class="checkbox mt-3">
-        <label v-for="type in types" :key="type" class="d-flex align-items-center justify-content-between mb-3">    
-          <div>
-            <h5 class="mb-0" v-if="type === 'lower'">{{ "Include lowercase letters" }}</h5>
-            <h5 class="mb-0" v-else-if="type === 'upper'">{{ "Include uppercase letters" }}</h5>
-            <h5 class="mb-0" v-else-if="type === 'number'">{{ "Include numbers" }}</h5>
-            <h5 class="mb-0" v-else-if="type === 'symbol'">{{ "Include symbols" }}</h5>
-          </div>
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="condition" :value="type" v-model="conditions"/>
-          </div>
-        </label>
-      </div> 
+      
+      <button class="btn-generate" @click="generatePass">Generate Password</button>
     </div>
-    
-    <button class="btn btn-primary btn-block" @click="generatePass" style="width: 100%;">Generate Password</button>
-  </div>
 </div>
 
 </template>
@@ -141,6 +139,91 @@ export default defineComponent({
 </script>
 
 <style>
+
+.app{
+  color: white;
+                                                                
+}
+
+.title{
+  margin-top: 20px;
+  
+}
+
+.container1{                   
+  position: absolute;                                          
+  display: flex;
+  border: 1px solid black ;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  height: auto;
+  top: 10%;
+  left: 35%;
+
+  border-radius: 20px;
+  background: #003554;
+  
+}
+
+.view-container{
+  width: 100%;
+}
+
+.password-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #D5DEEF ;
+
+}
+
+.length-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+
+  
+}
+
+.checkbox-label{
+  display: flex;
+  flex-direction: row;;
+  justify-content: space-between;
+  margin: 10px 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #D5DEEF ;
+}
+.btn-copy{
+  border-radius: 1rem;
+  padding: 10px;
+}
+.btn-copy img{
+  height: 30px;
+  
+}
+
+
+.btn-generate{
+  
+  margin: 30px;
+
+  font-weight: 600;
+  transition: all 300ms ease;
+  padding: 0.5rem;
+  width: 60%;
+  border-radius: 2rem;
+
+}
+
+
+
 
 
 
